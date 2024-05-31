@@ -1,0 +1,11 @@
+#!/bin/bash
+
+aws s3 cp s3://mpcs-cc-students/mauliafirmansyah/gas_annotator.zip /home/ec2-user/mpcs-cc
+unzip /home/ec2-user/mpcs-cc/gas_annotator.zip -d /home/ec2-user/mpcs-cc
+chown -R ec2-user:ec2-user /home/ec2-user/mpcs-cc/gas/
+
+aws s3 cp s3://mpcs-cc-resources/ssl/privkey.pem /home/ec2-user/mpcs-cc
+aws s3 cp s3://mpcs-cc-resources/ssl/fullchain.pem /home/ec2-user/mpcs-cc
+
+chmod 775 /home/ec2-user/mpcs-cc/gas/ann/run_ann.sh
+sudo -u ec2-user /home/ec2-user/mpcs-cc/gas/ann/run_ann.sh &
